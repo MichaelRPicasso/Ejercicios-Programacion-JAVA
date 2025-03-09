@@ -25,6 +25,15 @@ public class Tamagochi {
 //CONSTRUCTOR VACIO
 	public Tamagochi() {
 
+		this.hambre = 50;
+		this.suenio = 50;
+		this.higiene = 50;
+		this.diversion = 50;
+		this.vivo = true;
+		identificador = contador;
+		this.nombre = "tamagochi" + identificador;
+		contador++;
+
 	}
 
 //GETTER Y SETTER CORRESPONDIENTES
@@ -104,61 +113,61 @@ public class Tamagochi {
 	// COMO EL METIDO DE INTERACTUARTAMAGOCHI BAJA TODO EN 10 ESTO LE SUMA 30 PARA
 	// QUE QUEDE LA CUENTA EN +20. LOS 3 METODOS SIGUIENTES MANTIENEN MA MISMA
 	// ESTRUCTURA PERO CON DISTINTOS VALORES
-	public static void sumarHambre(Tamagochi[] tamagochi, int id) {
+	public void sumarHambre() {
 
-		if (tamagochi[id].vivo) {
-			tamagochi[id].setHambre(tamagochi[id].getHambre() + 30);
+		if (vivo) {
+			hambre += 30;
 
-			interactuarTamagochi(tamagochi[id]);
+			interactuarTamagochi();
 		}
-		if (tamagochi[id].getHambre() >= 100) {
-			tamagochi[id].setHambre(100);
+		if (hambre > 100) {
+			hambre = 100;
 
 		}
 
 	}
 
 //IGUAL QUE EL ANTERIOR PERO CON SUEÑO
-	public static void sumarSuenio(Tamagochi tamagochi[], int id) {
+	public void sumarSuenio() {
 
-		if (tamagochi[id].vivo) {
-			tamagochi[id].setSuenio(tamagochi[id].getSuenio() + 30);
+		if (vivo) {
+			suenio += 30;
 
-			interactuarTamagochi(tamagochi[id]);
+			interactuarTamagochi();
 		}
-		if (tamagochi[id].getSuenio() >= 100) {
-			tamagochi[id].setSuenio(100);
+		if (suenio > 100) {
+			suenio = 100;
 
 		}
 
 	}
 
 //IGUAL QUE EL ANTERIOR PERO CON HIGIENE
-	public static void sumarHigiene(Tamagochi tamagochi[], int id) {
+	public void sumarHigiene() {
 		boolean pletorico = false;
-		if (tamagochi[id].vivo) {
-			tamagochi[id].setHigiene(tamagochi[id].getHigiene() + 30);
+		if (vivo) {
+			higiene += 30;
 
-			interactuarTamagochi(tamagochi[id]);
+			interactuarTamagochi();
 		}
-		if (tamagochi[id].getHigiene() >= 100) {
-			tamagochi[id].setHigiene(100);
+		if (higiene > 100) {
+			higiene = 100;
 
 		}
 
 	}
 
 //IGUAL QUE EL ANTERIOR PERO CON DIVERSION
-	public static void sumarDiversion(Tamagochi tamagochi[], int id) {
+	public void sumarDiversion() {
 		boolean pletorico = false;
-		if (tamagochi[id].vivo) {
+		if (vivo) {
 
-			tamagochi[id].setDiversion(tamagochi[id].getDiversion() + 0);
+			diversion += 30;
 
-			interactuarTamagochi(tamagochi[id]);
+			interactuarTamagochi();
 		}
-		if (tamagochi[id].getDiversion() >= 100) {
-			tamagochi[id].setDiversion(100);
+		if (diversion > 100) {
+			diversion = 100;
 
 		}
 
@@ -166,46 +175,28 @@ public class Tamagochi {
 
 	// METODO PARA SER LLAMADO CUANDO LOS TAMAGOCHIS SON CUIDADOS
 
-	public static boolean interactuarTamagochi(Tamagochi tamagochi) {
+	public boolean interactuarTamagochi() {
 
-		if (tamagochi.vivo) {
+		if (vivo) {
 
-			tamagochi.setHambre(tamagochi.hambre - 10);
-			tamagochi.setSuenio(tamagochi.suenio - 10);
-			tamagochi.setHigiene(tamagochi.higiene - 10);
-			tamagochi.setDiversion(tamagochi.diversion - 10);
+			hambre -= 10;
+			suenio -= 10;
+			higiene -= 10;
+			diversion -= 10;
 
-			if (tamagochi.hambre <= 0 || tamagochi.suenio <= 0 || tamagochi.higiene <= 0 || tamagochi.diversion <= 0) {
+			if (hambre <= 0 || suenio <= 0 || higiene <= 0 || diversion <= 0) {
 
-				tamagochi.setHambre(0);
-				tamagochi.setSuenio(0);
-				tamagochi.setHigiene(0);
-				tamagochi.setDiversion(0);
+				hambre = 0;
+				suenio = 0;
+				higiene = 0;
+				diversion = 0;
 
-				tamagochi.setVivo(false);
+				vivo = false;
 
 			}
 		}
-		return tamagochi.vivo;
-	}
-
-//METODO PARA CREAR FACILMENTE UN TAMAGOCHI AL USARLO DESDE EL MAIN	
-
-	public static boolean agregarTamagochi(Tamagochi[] tamagochi, String nombre, int hambre, int suenio, int higiene,
-			int diversion) {
-
-		boolean flag = true;
-		for (int i = 0; (i < tamagochi.length) && flag; i++) {
-			if (tamagochi[i] == null) {
-
-				tamagochi[i] = new Tamagochi(nombre, hambre, suenio, higiene, diversion);
-				flag = false;
-
-			}
-
-		}
-
-		return flag;
+		return vivo;
 	}
 
 }
+
