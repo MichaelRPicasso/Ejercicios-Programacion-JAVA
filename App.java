@@ -62,25 +62,17 @@ public class App {
 
 			switch (opcion) {
 			case 1:
-
 				aniadirTamagochi();
 				break;
 			case 2:
-
 				listarTamagochi();
-
 				break;
 			case 3:
-
 				cuidarTamagochi();
-
 				break;
 			case 4:
-
 				atenderNecesidadesUrgentes();
-
 				break;
-
 			default:
 				System.out.println("Adios.");
 				flag = false;
@@ -113,7 +105,7 @@ public class App {
 		System.out.println("\nIntroduce su nivel de (entre 1 y 100)");
 		diversion = throwCrearTamagochi(1, 100);
 
-		System.out.println(Tamagochi.agregarTamagochi(tamagochis, nombre, hambre, suenio, higiene, diversion)
+		System.out.println(agregarTamagochi(nombre, hambre, suenio, higiene, diversion)
 				? "\nNo quedan huecos para crear nuevos tamagochis"
 				: nombre + " ha sido creado correctamente");
 
@@ -121,14 +113,14 @@ public class App {
 
 	// EN ESTA PARTE ES DONDE LOS VALORES INTRODUCIDOS EN EL METODO ANTERIOR SE USAN
 	// PARA CREAR UN OBJETO EN EL PRIMER HUECO NO NULL DEL ARRAY
-	public static boolean agregarTamagochi(Tamagochi[] tamagochi, String nombre, int hambre, int suenio, int higiene,
+	public static boolean agregarTamagochi(String nombre, int hambre, int suenio, int higiene,
 			int diversion) {
 
 		boolean flag = true;
-		for (int i = 0; (i < tamagochi.length) && flag; i++) {
-			if (tamagochi[i] == null) {
+		for (int i = 0; (i < tamagochis.length) && flag; i++) {
+			if (tamagochis[i] == null) {
 
-				tamagochi[i] = new Tamagochi(nombre, hambre, suenio, higiene, diversion);
+				tamagochis[i] = new Tamagochi(nombre, hambre, suenio, higiene, diversion);
 				flag = false;
 
 			}
@@ -195,19 +187,19 @@ public class App {
 
 		if (tamagochis[id].getHambre() <= 20 && tamagochis[id].getHambre() > 0) {
 
-			Tamagochi.sumarHambre(tamagochis, id);
+			tamagochis[id].sumarHambre();
 
 		} else if (tamagochis[id].getSuenio() <= 20 && tamagochis[id].getSuenio() > 0) {
 
-			Tamagochi.sumarSuenio(tamagochis, id);
+			tamagochis[id].sumarSuenio();
 
 		} else if (tamagochis[id].getHigiene() <= 20 && tamagochis[id].getHigiene() > 0) {
 
-			Tamagochi.sumarHigiene(tamagochis, id);
+			tamagochis[id].sumarHigiene();
 
 		} else if (tamagochis[id].getDiversion() <= 20 && tamagochis[id].getDiversion() > 0) {
 
-			Tamagochi.sumarDiversion(tamagochis, id);
+			tamagochis[id].sumarDiversion();
 		} else {
 			System.out.printf(
 					"\033[032m" + tamagochis[id].getNombre() + " no tiene necesidades urgentes que atender.\033[0m\n");
@@ -295,17 +287,17 @@ public class App {
 			switch (opcion) {
 			case 1:
 
-				Tamagochi.sumarHambre(tamagochis, id);
+				tamagochis[id].sumarHambre();
 
 				break;
 			case 2:
-				Tamagochi.sumarSuenio(tamagochis, id);
+				tamagochis[id].sumarSuenio();
 				break;
 			case 3:
-				Tamagochi.sumarHigiene(tamagochis, id);
+				tamagochis[id].sumarHigiene();
 				break;
 			case 4:
-				Tamagochi.sumarDiversion(tamagochis, id);
+				tamagochis[id].sumarDiversion();
 				break;
 			default:
 				break;
@@ -353,7 +345,7 @@ public class App {
 				((tamagochis[numero].getNombre().length() <= 7) ? (tamagochis[numero].getNombre().toUpperCase())
 						: (tamagochis[numero].getNombre().toUpperCase()).substring(0, 7)));
 		System.out.println("      ||         |");
-		System.out.println("\033[32m,,|\\/,\033[0m||\033[32m-_,-,_,,-|\033[0m|\033[32m,/_\\\033[31m*\033[32m/\033[0m");
+		System.out.println("\033[32m,,|\\/,\033[0m||\033[32m-_,-,_,,-\033[0m|\033[32m|,/_\\\033[31m*\033[32m/\033[0m");
 		System.out.println();
 	}
 
@@ -374,6 +366,7 @@ public class App {
 			}
 
 		}
-		return idMaxima;
+		return idMaxima-1;
 	}
+	
 }
